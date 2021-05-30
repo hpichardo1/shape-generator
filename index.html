@@ -79,10 +79,11 @@
       const container = document.querySelector('#container');
 
       container.addEventListener('click', (ev)=>{
-        if(ev.target.tagName === 'div'){
-          ev.target.parentNode.removeChild(ev.target);
+        console.log(ev.target.nodeName)
+        if(ev.target.nodeName === 'DIV'){
+          ev.target.style.backgroundColor = 'white'
         }
-      });
+      })
 
       const generateCircle = ()=> {
         const size = `${input.value}px`;
