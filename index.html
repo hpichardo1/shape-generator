@@ -68,7 +68,7 @@
     </ul>
     <a href='https://github.com/FullstackAcademy/shape-generator'>Repo</a>
     <form>
-      <input name='px' value='25'/>
+      <input name='px' min='25' max='250' value='25'/>
     </form>
     <div id='container'>
     </div>
@@ -79,13 +79,14 @@
       const container = document.querySelector('#container');
 
       container.addEventListener('click', (ev)=>{
-        if(!ev.target.id){
+        if(ev.target.tagName === 'div'){
           ev.target.parentNode.removeChild(ev.target);
         }
       });
 
       const generateCircle = ()=> {
         const size = `${input.value}px`;
+
         const circle = document.createElement('div');
         circle.style.width = size;
         circle.style.height = size;
@@ -93,7 +94,7 @@
         const span = document.createElement('span');
         span.innerText = input.value;
         circle.appendChild(span);
-        input.value = 25 + Math.floor(Math.random()*50);
+        input.value = 25 + Math.floor(Math.random()*(250-25));
         window.setTimeout(function(){
           circle.classList.add('blue');
         }, 500);
