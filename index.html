@@ -5,6 +5,10 @@
         font-family: verdana;
         padding: 1rem;
       }
+      h1 {
+        display: flex;
+        flex-direction: column;
+      }
       form {
         border: solid 1px dodgerBlue;
         padding: 1rem;
@@ -29,6 +33,14 @@
         width: 75px;
         height: 75px;
         border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      #square {
+        background-color: tomato;
+        width: 75px;
+        height: 75px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -77,16 +89,25 @@
       const input = form.querySelector('input');
       const link = document.querySelector('a');
       const container = document.querySelector('#container');
+      const h1 = document.querySelector('h1')
+      const numCircles = document.createElement('span')
+      h1.appendChild(numCircles)
+      const averageSize = document.createElement('span')
+      h1.appendChild(averageSize)
 
       container.addEventListener('click', (ev)=>{
-        console.log(ev.target.nodeName)
         if(ev.target.nodeName === 'DIV'){
           ev.target.style.backgroundColor = 'white'
         }
       })
 
+      let totalSize = 0
+      let count = 0
+
       const generateCircle = ()=> {
         const size = `${input.value}px`;
+       
+        totalSize += Number(input.value)
 
         const circle = document.createElement('div');
         circle.style.width = size;
@@ -99,6 +120,15 @@
         window.setTimeout(function(){
           circle.classList.add('blue');
         }, 500);
+        
+        numCircles.innerHTML =  `Number of circles ${document.querySelectorAll('#container > div').length}`
+        averageSize.innerHTML = `Average Size ${totalSize/document.querySelectorAll('#container > div').length}`
+        count++
+        if (count % 2 === 0){
+          circle.style.height = Number(input.value/2)
+          circle.style.borderRadius = 0
+        }
+
       };
 
       form.addEventListener('submit', (ev)=> {
